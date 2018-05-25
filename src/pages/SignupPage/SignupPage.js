@@ -7,8 +7,23 @@ class SignupPage extends Component {
         super(props);
         this.state = {message: ''}
     }
-    
-    render()
-}
 
-export default SignupPage;''
+    updateMessage = (msg) => {
+        this.setState({message: msg});
+    }
+    
+    render() {
+        return (
+            <div className='SignupPage'>
+                <SignupForm
+                {...this.props}
+                updateMessage={this.updateMessage}
+                handleSignup={this.props.handleSignup}
+            />
+            <p>{this.state.message}</p>
+        </div>
+        );
+    }
+};
+
+export default SignupPage;
