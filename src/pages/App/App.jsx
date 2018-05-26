@@ -3,11 +3,13 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    //Redirect
 } from 'react-router-dom';
 import'./App.css';
+import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import userService from '../../utils/userService';
 
 class App extends Component {
     constructor(props) {

@@ -9,7 +9,7 @@ require('./config/database');
 
 var app = express();
 
-app.use(logger('dv'));
+app.use(logger('dev'));
 
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 
 app.use(require('./config/auth'));
 
-app.use('/api/user', require('./routes/api/users'));
-app.use('/api/cart', require('./routes/api/cart'));
+app.use('/api/users', require('./routes/api/users'));
+// app.use('/api/cart', require('./routes/api/cart'));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
