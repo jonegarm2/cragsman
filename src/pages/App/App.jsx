@@ -19,7 +19,8 @@ class App extends Component {
             name: '',
             cart: [],
             product: [],
-            similarItems: []
+            leftSide: [],
+            similarItems: [],
         };
     }
 
@@ -54,6 +55,9 @@ class App extends Component {
                         <Route exact path='/' render={() =>
                             <HomePage
                                 handleLogout={this.handleLogout}
+                                handleLeft={this.state.leftSide}
+                                handleRight={this.state.similarItems}
+                                user={this.state.user}
                             />
                         }/>
                         <Route exact path='/signup' render={(props) => 
