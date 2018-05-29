@@ -10,12 +10,16 @@ import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
+const API = 'http://api.sierratradingpost.com/api/1.0/brands/';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: ''
+            name: '',
+            cart: [],
+            product: [],
+            similarItems: []
         };
     }
 
