@@ -5,10 +5,10 @@ var productsCtrl = require('../../controllers/products');
 
 
 /* ----- Public Routes ---------- */
-router.post('/products', productsCtrl.login);
-router.post('/brands', productsCtrl.signup);
-router.post('/activities', productsCtrl.login);
-router.post('/products', productsCtrl.login);
-router.post('/products', productsCtrl.login);
+router.get('/products', productsCtrl.products);
+router.get('/brands', productsCtrl.brands);
+router.get('/activities', productsCtrl.activities);
+router.get('/', productsCtrl.home);
+
 
 module.exports = router;

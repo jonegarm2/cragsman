@@ -39,6 +39,15 @@ class App extends Component {
         this.setState({user: userService.getUser()});
     }
 
+    // handleSearch = () => {
+    //     return (`${API}products/search~{search-term-url-encoded-with-hyphens}/?api_key=${process.env.API_KEY}`
+    //    function(err, response, body) {
+    //         res.render('products/results', {products: JSON.parse(body).results});
+    //     }
+
+    //     ${req.query.search}
+    
+
     /*---------- Lifecycle Methods ---------*/
 
     componentDidMount() {
@@ -50,7 +59,6 @@ class App extends Component {
     render() {
         return (
             <div>
-                <header>Cragsman</header>
                 <Router>
                     <Switch>
                         <Route exact path='/' render={() =>

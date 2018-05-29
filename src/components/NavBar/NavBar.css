@@ -1,0 +1,9 @@
+.NavBar {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.NavBar-link {
+    color: white;
+}
