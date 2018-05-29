@@ -11,7 +11,8 @@ function signup(req, res) {
         .catch(err => res.status(400).json(err));
 }
 
-function login(req, res) {
+function login(req, res) { 
+  console.log(req.body)
     User.findOne({email: req.body.email}).exec().then(user => {
       if (!user) return res.status(401).json({err: 'bad credentials'});
       user.comparePassword(req.body.pw, (err, isMatch) => {

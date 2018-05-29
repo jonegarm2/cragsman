@@ -10,7 +10,7 @@ import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
-const API = 'http://api.sierratradingpost.com/api/1.0/brands/';
+const API = 'http://api.sierratradingpost.com/api/1.0/';
 
 class App extends Component {
     constructor(props) {
@@ -46,6 +46,7 @@ class App extends Component {
         this.setState({user});
     }
 
+
     render() {
         return (
             <div>
@@ -56,7 +57,7 @@ class App extends Component {
                             <HomePage
                                 handleLogout={this.handleLogout}
                                 handleLeft={this.state.leftSide}
-                                handleRight={this.state.similarItems}
+                                similarItems={this.state.similarItems}
                                 user={this.state.user}
                             />
                         }/>
