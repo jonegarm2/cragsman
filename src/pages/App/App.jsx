@@ -4,7 +4,7 @@ import {
     Route,
     //Redirect
 } from 'react-router-dom';
-import'./App.css';
+import './App.css';
 import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -20,7 +20,8 @@ class App extends Component {
             cart: [], 
             products: [],
             departments: [],
-            similarItems: []
+            similarItems: [],
+            brands: []
         };
     }
 
@@ -79,6 +80,8 @@ class App extends Component {
                             similarItems={this.state.similarItems}
                             user={this.state.user}
                             departments={this.state.departments}
+                            brands={this.state.brands}
+                            cart={this.state.cart}
                         />
                     }/>
                     <Route exact path='/signup' render={(props) => 
