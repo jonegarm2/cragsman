@@ -5,21 +5,21 @@ const API = 'http://api.sierratradingpost.com/api/1.0/';
 
 function products(req, res){
     getApiData('products', function(err, response, body) {
-        if (err) return res.status(401).json(err)
-        res.status(200).json(body) 
+        if (err) return res.status(401).json(err);
+        res.status(200).json(JSON.parse(body)); 
     })
 }
 function brands(req, res){
     getApiData('brands', function(err, response, body) {
-        if (err) return res.status(401).json(err)
-        res.status(200).json(body) 
+        if (err) return res.status(401).json(err);
+        res.status(200).json(JSON.parse(body)); 
     })
 }
 
 function activities(req, res){
     getApiData('departments', function(err, response, body) {
-        if (err) return res.status(401).json(err)
-        res.status(200).json(body) 
+        if (err) return res.status(401).json(err);
+        res.status(200).json(JSON.parse(body)); 
     })
 }
 function details(req, res){

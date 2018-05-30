@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     //Redirect
@@ -10,8 +9,9 @@ import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
-import productService from '../../utils/productAPI'
-const API = 'http://api.sierratradingpost.com/api/1.0/';
+import productService from '../../utils/productAPI';
+import NavBar from '../../components/NavBar/NavBar';
+
 
 class App extends Component {
     constructor(props) {
@@ -55,37 +55,45 @@ class App extends Component {
     componentDidMount() {
         let user = userService.getUser();
         this.setState({user});
-        let apiCalls = Promise.all([productService.apiUtil('departments'), productService.apiUtil('brands'), productService.apiUtil('activities')])
+        productService.apiUtil('brands').then(result => {
+            this.setState({brands: result.Result});
+        });
+        productService.apiUtil('activities').then(result => {
+            this.setState({departments: result.Result.Children});
+        });
     }
 
 
     render() {
         return (
             <div>
-                <Router>
-                    <Switch>
-                        <Route exact path='/' render={() =>
-                            <HomePage
-                                handleLogout={this.handleLogout}
-                                handleLeft={this.state.leftSide}
-                                similarItems={this.state.similarItems}
-                                user={this.state.user}
+                <NavBar
+                    user={this.state.user}
+                    handleLogout={this.handleLogout}
+                />
+                <Switch>
+                    <Route exact path='/' render={() =>
+                        <HomePage
+                            handleLogout={this.handleLogout}
+                            handleLeft={this.state.leftSide}
+                            similarItems={this.state.similarItems}
+                            user={this.state.user}
+                            departments={this.state.departments}
+                        />
+                    }/>
+                    <Route exact path='/signup' render={(props) => 
+                        <SignupPage
+                            {...props}
+                            handleSignup={this.handleSignup}
+                        />
+                    }/>
+                    <Route exact path='/login' render={(props) => 
+                        <LoginPage
+                            {...props}
+                            handleLogin={this.handleLogin}
                             />
-                        }/>
-                        <Route exact path='/signup' render={(props) => 
-                            <SignupPage
-                                {...props}
-                                handleSignup={this.handleSignup}
-                            />
-                        }/>
-                        <Route exact path='/login' render={(props) => 
-                            <LoginPage
-                                {...props}
-                                handleLogin={this.handleLogin}
-                             />
-                        }/>
-                    </Switch>
-                </Router>
+                    }/>
+                </Switch>
             </div>
         );
     }

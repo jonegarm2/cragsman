@@ -1,17 +1,19 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-import NavBar from '../../components/NavBar/NavBar'
+//import {Link} from 'react-router-dom';
 import MainBody from '../../components/MainBody/MainBody';
-import LeftSide from '../../components/LeftSide/LeftSide';
-import SimilarItems from '../../components/SimilarItems/SimilarItems';
+
+//import SimilarItems from '../../components/SimilarItems/SimilarItems';
+import DepartmentList from '../../components/DepartmentList/DepartmentList';
 
 const HomePage = (props) => {
     return (
         <div className="HomePage">
-            <NavBar user={props.user} 
-                handleLogout={props.handleLogout} />
-            {/* <div className="MainBody"> */}
-                {/* <MainBody /> */}
+            <DepartmentList departments={props.departments} />
+            <div className="MainBody">
+
+            <MainBody 
+                />
+            </div>
         </div>
     );
 }
