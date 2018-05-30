@@ -30,7 +30,7 @@ function details(req, res){
 }
 
 function getApiData(path, cb) {
-    request(`${API}${path}/?api_key=${process.env.API_KEY}`, function(error, response, body) {
+    request(`${API}${path}/?perpage=100&api_key=${process.env.API_KEY}`, function(error, response, body) {
         cb(error, response, body)
     })
 }

@@ -18,7 +18,9 @@ const NavBar = (props) => {
       <Link to='/activites' className='NavBar-link'>ACTIVITIES</Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;
           <input className="Button" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="Button" type="submit">Search</button>    
+          <button className="Button" type="submit">Search</button> 
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      {/* Modal for Cart */}
     </div>
     :
     <div className="NavBar">

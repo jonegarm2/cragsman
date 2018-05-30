@@ -1,16 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Switch,
     Route,
-    //Redirect
+   
 } from 'react-router-dom';
+
 import './App.css';
-import HomePage from '../HomePage/HomePage';
+
+import NavBar from '../../components/NavBar/NavBar';
+import SearchPage from '../SearchPage/SearchPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import ResultsPage from '../ResultsPage/ResultsPage';
+
 import userService from '../../utils/userService';
 import productService from '../../utils/productAPI';
-import NavBar from '../../components/NavBar/NavBar';
 
 
 class App extends Component {
@@ -19,9 +23,11 @@ class App extends Component {
         this.state = {
             cart: [], 
             products: [],
-            departments: [],
-            similarItems: [],
-            brands: []
+            // departments: [],
+            // similarItems: [],
+            // brands: [], 
+            userSearch: "", 
+            searchItems: []
         };
     }
 
@@ -40,6 +46,12 @@ class App extends Component {
         this.setState({user: userService.getUser()});
     }
 
+    updateUserSearch = (e) => {
+        this.setState({ 
+            userSearch: e.target.value
+        })
+    }
+
     // handleSearch = () => {
     //     return (`${API}products/search~{search-term-url-encoded-with-hyphens}/?api_key=${process.env.API_KEY}`
     //    function(err, response, body) {
@@ -49,18 +61,29 @@ class App extends Component {
     //     ${req.query.search}
 
 
-    
+    searchProducts = () => {
+        let name = this.state.userSearch;
+        let searchItems = this.state.products.filter(function(prod) {
+            if (prod.Name.indexOf(name) !== -1) return true;
+            return false;
+        });
+        this.setState({ searchItems: searchItems })
+    }
 
     /*---------- Lifecycle Methods ---------*/
 
     componentDidMount() {
         let user = userService.getUser();
         this.setState({user});
-        productService.apiUtil('brands').then(result => {
-            this.setState({brands: result.Result});
-        });
-        productService.apiUtil('activities').then(result => {
-            this.setState({departments: result.Result.Children});
+        // productService.apiUtil('brands').then(result => {
+        //     console.log(result.Result);
+        //     // this.setState({brands: result.Result});
+        // });
+        // productService.apiUtil('activities').then(result => {
+        //     this.setState({departments: result.Result.Children});
+        // });
+        productService.apiUtil('products').then(result => {
+            this.setState({ products: result.Result })
         });
     }
 
@@ -71,10 +94,10 @@ class App extends Component {
                 <NavBar
                     user={this.state.user}
                     handleLogout={this.handleLogout}
-                />
+                />  
                 <Switch>
                     <Route exact path='/' render={() =>
-                        <HomePage
+                        <SearchPage
                             handleLogout={this.handleLogout}
                             handleLeft={this.state.leftSide}
                             similarItems={this.state.similarItems}
@@ -82,6 +105,9 @@ class App extends Component {
                             departments={this.state.departments}
                             brands={this.state.brands}
                             cart={this.state.cart}
+                            updateUserSearch={this.updateUserSearch}
+                            userSearch={this.state.userSearch}
+                            searchProducts={this.searchProducts}
                         />
                     }/>
                     <Route exact path='/signup' render={(props) => 
@@ -94,6 +120,13 @@ class App extends Component {
                         <LoginPage
                             {...props}
                             handleLogin={this.handleLogin}
+                            />
+                    }/>
+                    <Route exact path='/results' render={(props) => 
+                        <ResultsPage
+                            {...props}
+                            handleLogin={this.handleLogin}
+                            searchItems={this.state.searchItems}
                             />
                     }/>
                 </Switch>
