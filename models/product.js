@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var productSchema = new mongoose.Schema({
-    id: String,
+    apiId: String,
     brand: String,
+    desc: String,
     rating: Number
 })
 

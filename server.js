@@ -21,7 +21,7 @@ app.use(cors())
 app.use(require('./config/auth'));
 
 app.use('/api/users', require('./routes/api/users'));
-// app.use('/api/cart', require('./routes/api/cart'));
+app.use('/api/products', require('./routes/api/products'));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

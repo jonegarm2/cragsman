@@ -10,17 +10,17 @@ import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
+import productService from '../../utils/productAPI'
 const API = 'http://api.sierratradingpost.com/api/1.0/';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            cart: [],
-            product: [],
-            leftSide: [],
-            similarItems: [],
+            cart: [], 
+            products: [],
+            departments: [],
+            similarItems: []
         };
     }
 
@@ -46,6 +46,8 @@ class App extends Component {
     //     }
 
     //     ${req.query.search}
+
+
     
 
     /*---------- Lifecycle Methods ---------*/
@@ -53,6 +55,7 @@ class App extends Component {
     componentDidMount() {
         let user = userService.getUser();
         this.setState({user});
+        let apiCalls = Promise.all([productService.apiUtil('departments'), productService.apiUtil('brands'), productService.apiUtil('activities')])
     }
 
 
