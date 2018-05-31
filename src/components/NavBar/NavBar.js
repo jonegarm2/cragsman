@@ -8,8 +8,6 @@ const NavBar = (props) => {
       <span className='NavBar-home'> Welcome, {props.user.name}</span>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <Link to='' className='NavBar-link' onClick={props.handleLogout} >LOG OUT</Link>
-      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <Link to='/' className='NavBar-link'>HOME</Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <div>CRAGSMAN</div>
       &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -21,9 +19,9 @@ const NavBar = (props) => {
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <Link to='/signup' className='NavBar-link'>SIGN UP</Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;
-      <Link to='/' className='NavBar-link'>HOME</Link>
+      <div>CRAGSMAN</div>
       &nbsp;&nbsp;|&nbsp;&nbsp;
-      <Link to='/cart' className='NavBar-link'>CART</Link>      
+      {/* <button onClick={() => this.setState({ showModal: true})}>      */}
     </div>;
 
     
@@ -34,7 +32,5 @@ const NavBar = (props) => {
     </div>
   );
 };
-
-
 
 export default NavBar;

@@ -10,9 +10,17 @@ const Cart = (props) => {
       <div className="Cart">
         <span className='Cart-home'>{props.user.name}'s Cart</span>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <button className="button" type="submit">Checkout</button>  
-   
+        return props.showModal ? (
+        <div className="Modal">
+          <div className="Modal-content">
+            <button onClick={() => props.closeModal()}>X</button>
+              {props.children}
+         </div>
+       </div>
       </div>
+    ) : null;
+};  
+   
       :
       <div className="Cart">
         Sign in to Add to Cart! 
