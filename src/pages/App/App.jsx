@@ -52,23 +52,26 @@ class App extends Component {
         })
     }
 
-    // handleSearch = () => {
-    //     return (`${API}products/search~{search-term-url-encoded-with-hyphens}/?api_key=${process.env.API_KEY}`
-    //    function(err, response, body) {
-    //         res.render('products/results', {products: JSON.parse(body).results});
-    //     }
-
-    //     ${req.query.search}
-
 
     searchProducts = () => {
-        let name = this.state.userSearch;
-        let searchItems = this.state.products.filter(function(prod) {
-            if (prod.Name.indexOf(name) !== -1) return true;
-            return false;
+        // let name = this.state.userSearch;
+        // let searchItems = this.state.products.filter(function(prod) {
+        //     if (prod.Name.indexOf(name) !== -1) return true;
+        //     return false;
+        // });
+        // this.setState({ searchItems: searchItems })
+        productService.apiUtil("Jackets").then(result => {
+            // this.setState({ products: result.Result })
+            console.log(result);
+            // this.setState({ 
+            //     searchItems: result.Result
+            // })
+            
         });
-        this.setState({ searchItems: searchItems })
+        
     }
+
+
 
     /*---------- Lifecycle Methods ---------*/
 
@@ -76,15 +79,17 @@ class App extends Component {
         let user = userService.getUser();
         this.setState({user});
         // productService.apiUtil('brands').then(result => {
-        //     console.log(result.Result);
+        //     console.log(result);
         //     // this.setState({brands: result.Result});
         // });
         // productService.apiUtil('activities').then(result => {
         //     this.setState({departments: result.Result.Children});
         // });
-        productService.apiUtil('products').then(result => {
-            this.setState({ products: result.Result })
-        });
+        // productService.apiUtil('products').then(result => {
+        //     // this.setState({ products: result.Result })
+        //     console.log(result);
+            
+        // });
     }
 
 
