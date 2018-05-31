@@ -16,7 +16,7 @@
   * Add similarItems column
 
 ## Special Thanks
-  * Jim
-  * Jon
+  * Jim Clark
+  * Jon Tamsut
   * Everyone else in the class
   * our lord and savior baby jesus
