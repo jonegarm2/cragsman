@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './NavBar.css';
-import Cart from '../Cart/Cart'
+
 
 const NavBar = (props) => {
   let nav = props.user ?
@@ -22,7 +22,6 @@ const NavBar = (props) => {
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <div>CRAGSMAN</div>
       &nbsp;&nbsp;|&nbsp;&nbsp;
-      {/* <button onClick={() => this.setState({ showModal: true})}>      */}
     </div>;
 
     

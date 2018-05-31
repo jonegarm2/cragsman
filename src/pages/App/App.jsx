@@ -12,6 +12,7 @@ import SearchPage from '../SearchPage/SearchPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import ResultsPage from '../ResultsPage/ResultsPage';
+import CartPage from '../CartPage/CartPage';
 
 import userService from '../../utils/userService';
 //import productService from '../../utils/productAPI';
@@ -72,9 +73,25 @@ class App extends Component {
         .catch(err => console.log(err))
     }
 
-    addToCart = () => {}
+    addToCart = (newItem) => {
+        let cartCopy = [...this.state.cart]
+        cartCopy.push(newItem)
+        this.setState({
+            cart: cartCopy
+        })
+    }
 
-    removeFromCart = () => {}
+    removeFromCart = (id) => {
+        let cartIdx = this.state.cart.findIndex(function(elem) {
+            return elem.Id === id
+        })
+        let cartCopy = [...this.state.cart]
+        cartCopy.splice(cartIdx, 1)
+        this.setState({
+            cart: cartCopy
+        })
+
+    }
 
 
 
@@ -120,7 +137,17 @@ class App extends Component {
                             {...props}
                             handleLogin={this.handleLogin}
                             searchResults={this.state.searchResults}
+                            user={this.state.user}
+                            addToCart={this.addToCart}
                             />
+                    }/>
+                    <Route exact path='/cart' render={(props) =>
+                        <CartPage
+                            {...props}
+                            handleLogin={this.handleLogin}
+                            cart={this.state.cart}
+                            removeFromCart={this.removeFromCart}
+                        />
                     }/>
                 </Switch>
             </div>

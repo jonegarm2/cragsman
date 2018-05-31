@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResultsPage = ({ searchResults, addToCart }) => (
+const ResultsPage = ({ searchResults, addToCart, user }) => (
     <div>
         <ol>
             {searchResults.map((item, idx) => 
@@ -11,7 +11,7 @@ const ResultsPage = ({ searchResults, addToCart }) => (
                         {item.Brand.Name} <br/>
                         {item.Reviews.AverageRating} <br/>
                         {item.SuggestedRetailPrice} <br/>
-                        <button className="CartButton" onClick={addToCart}>Add To Cart</button>
+                        {user ? <button  className="CartButton" onClick={() => addToCart(item)}>Add To Cart</button>: null}
                         </div>
                 </div>)} 
         </ol>
