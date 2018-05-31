@@ -74,6 +74,8 @@ class App extends Component {
 
     addToCart = () => {}
 
+    removeFromCart = () => {}
+
 
 
     /*---------- Lifecycle Methods ---------*/
