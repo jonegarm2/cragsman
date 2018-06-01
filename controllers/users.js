@@ -60,6 +60,16 @@ function getOrCreateProduct(product) {
   });
 }
 
+function removeFromCart(req, res) {
+  User.findById(req.user._id, function(err, user) {
+    user.cart.remove(req.params.id);
+    user.save();
+    user.populate('cart').execPopulate().then(u => {
+      res.json(user.cart)
+    });
+  })
+}
+
   /* --------- Helper Function --------- */
 
 
@@ -76,6 +86,7 @@ module.exports = {
     signup,
     login,
     getCart,
-    addToCart
+    addToCart, 
+    removeFromCart
 };
 

@@ -17,7 +17,7 @@ import DetailsPage from '../DetailsPage/DetailsPage';
 
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
-//import productService from '../../utils/productAPI';
+
 
 
 class App extends Component {
@@ -64,7 +64,7 @@ class App extends Component {
     }
 
     searchProducts = () => {
-        fetch('api/products/search', {
+        fetch(`${window.location.protocol}//${window.location.href.split("/")[2]}/api/products/search`, {
             method: 'POST', 
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify({search: this.state.userSearch})
@@ -90,7 +90,7 @@ class App extends Component {
 
     addToCart = (newItem) => {
         console.log(newItem)
-        fetch('api/users/cart', {
+        fetch(`${window.location.protocol}//${window.location.href.split("/")[2]}/api/users/cart`, {
             method: 'POST',
             headers: {
                 "Authorization": "Bearer " + tokenService.getToken(),
@@ -113,28 +113,18 @@ class App extends Component {
         })
     }
 
-    removeFromCart = (newItem) => {
-        console.log(newItem)
-        fetch('api/users/cart', {
+    removeFromCart = (itemId) => {
+        console.log(itemId)
+        fetch(`api/users/cart/products/${itemId}`, {
             method: 'DELETE',
             headers: {
-                "Authorization": "Bearer " + tokenService.removeToken(),
-                "Content-Type": 'application/json'
+                "Authorization": "Bearer " + tokenService.getToken(),
             },
-            body: JSON.stringify({
-                apiId: newItem.Id,
-                brand: newItem.Brand.Name,
-                name: newItem.Name,
-                desc: newItem.NameWithoutBrand,
-                rating: newItem.Reviews.AverageRating,
-                imgUrl: newItem.Images.PrimaryMedium,
-                bigImgUrl: newItem.Images.PrimaryExtraLarge,
-                price: newItem.SuggestedRetailPrice
-            })
         })
         .then(res => res.json())
         .then(cart => {
             this.setState({cart});
+            this.props.history.push('/cart');
         })
     }
 
