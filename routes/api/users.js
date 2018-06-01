@@ -8,4 +8,9 @@ var usersCtrl = require('../../controllers/users');
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
 
+
+
+router.get('/cart', usersCtrl.getCart);
+router.post('/cart', usersCtrl.addToCart);
+
 module.exports = router;

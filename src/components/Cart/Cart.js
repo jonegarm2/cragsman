@@ -17,7 +17,7 @@ const Cart = (props, removeFromCart) => {
                           {item.Brand.Name} <br/>
                           {item.Reviews.AverageRating} <br/>
                           {item.SuggestedRetailPrice} <br/>
-                          <button className="removeButton" onClick={removeFromCart}> Remove from Cart</button>
+                          <button className="Button" onClick={removeFromCart}>Remove from Cart</button>
                           </div>
                   </div>)} 
           </ol>

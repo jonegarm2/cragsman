@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
     name: String,
     email: {type: String, required: true, lowercase: true, unique: true},
     password: String,
-    cart: [{ref: 'product', type: mongoose.Schema.Types.ObjectId}] 
+    cart: [{ref: 'Product', type: mongoose.Schema.Types.ObjectId}] 
 }, {
     timestamps: true
 });

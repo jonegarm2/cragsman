@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var Product = require('../models/product');
 var jwt = require('jsonwebtoken');
 var SECRET = process.env.SECRET;
 
@@ -26,9 +27,44 @@ function login(req, res) {
     }).catch(err => res.status(401).json(err));
 }
 
+function getCart(req, res) {
+  User.findById(req.user._id).populate('cart').exec()
+  .then(user => {
+    res.json(user.cart)
+  });
+}
+
+function addToCart(req, res) {
+  var product = req.body;
+  getOrCreateProduct(product).then(p => {
+    User.findById(req.user._id)
+    .then(user => {
+      user.cart.push(p._id);
+      user.save();
+      user.populate('cart').execPopulate().then(u => {
+        res.json(user.cart)
+      });
+    });
+  });
+}
+
+function getOrCreateProduct(product) {
+  return new Promise(function(resolve) {
+    Product.findOne({apiId: product.Id})
+      .then(prod => {
+        if (prod) return resolve(prod);
+        Product.create(product)
+          .then(p => resolve(p))
+          .catch(err => console.log(err))
+      });
+  });
+}
+
   /* --------- Helper Function --------- */
 
+
 function createJWT(user) {
+    delete user.cart;
     return jwt.sign(
         {user}, // data payload
         SECRET,
@@ -38,6 +74,8 @@ function createJWT(user) {
 
 module.exports = {
     signup,
-    login
+    login,
+    getCart,
+    addToCart
 };
 

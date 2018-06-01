@@ -18,6 +18,4 @@ const DetailsPage = ({searchResults, addToCart, user}) => {
     )
 }
 
-
-
 export default DetailsPage;

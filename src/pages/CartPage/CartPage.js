@@ -1,19 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const CartPage = ({cart, removeFromCart}) => (
-    <div>
-        {cart.map((item, idx) => 
-            <div key={idx}>
-                {item.NameWithoutBrand} <br/>
-                <img src={item.Images.PrimaryMedium} alt="" /> <br/>
-                    <div>
-                    {item.Brand.Name} <br/> 
-                    {item.Reviews.AverageRating} <br/>
-                    {item.SuggestedRetailPrice} <br/>
-                    <button className="removeButton" onClick={() => removeFromCart(item.Id)}> Remove from Cart</button>
+class CartPage extends Component {
+    render() {
+        return (
+            <div>
+                <h1>Cart</h1>
+                {this.props.cart.map((item, idx) => 
+                    <div key={idx}>
+                        {item.desc} <br/>
+                        <img src={item.imgUrl} alt="" /> <br/>
+                        <div>
+                            {item.brand} <br/> 
+                            {item.rating} <br/>
+                            {item.price} <br/>
+                            <button className="removeButton" onClick={() => this.cart.removeFromCart(item.Id)}> Remove from Cart</button>
+                        </div>
                     </div>
-            </div>)} 
-    </div>
-)
+                )} 
+            </div>
+        );
+    }
+}
 
-export default CartPage
+export default CartPage;

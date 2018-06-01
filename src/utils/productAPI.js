@@ -10,7 +10,7 @@ function apiUtilAuth(path, method) {
         method: method, 
         headers: method === "POST" ? {
             "Content-Type": "application/json",
-            "Authorization": "Bearer" + tokenService.getToken()
+            "Authorization": "Bearer " + tokenService.getToken()
         } : null
     })
     .then(data => data.json())

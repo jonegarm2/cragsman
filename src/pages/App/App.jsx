@@ -13,8 +13,10 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import ResultsPage from '../ResultsPage/ResultsPage';
 import CartPage from '../CartPage/CartPage';
+import DetailsPage from '../DetailsPage/DetailsPage';
 
 import userService from '../../utils/userService';
+import tokenService from '../../utils/tokenService';
 //import productService from '../../utils/productAPI';
 
 
@@ -22,8 +24,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cart: [], 
-            products: [], 
+            products: [],
+            cart: [],
             userSearch: "", 
             searchItems: [],
             searchResults: [],
@@ -42,15 +44,17 @@ class App extends Component {
 
     handleLogout = () => {
         userService.logout();
-        this.setState({user: null});
+        this.setState({user: null, cart: []});
     }
 
     handleSignup = () => {
         this.setState({user: userService.getUser()});
+        this.loadCart();
     }
 
     handleLogin = () => {
         this.setState({user: userService.getUser()});
+        this.loadCart();
     }
 
     updateUserSearch = (e) => {
@@ -73,11 +77,39 @@ class App extends Component {
         .catch(err => console.log(err))
     }
 
+    loadCart = () => {
+        fetch('/api/users/cart', {
+            headers: {
+                "Authorization": "Bearer " + tokenService.getToken()
+            }
+        }).then(res => res.json())
+        .then(cart => {
+            this.setState({cart});
+        });
+    }
+
     addToCart = (newItem) => {
-        let cartCopy = [...this.state.cart]
-        cartCopy.push(newItem)
-        this.setState({
-            cart: cartCopy
+        console.log(newItem)
+        fetch('api/users/cart', {
+            method: 'POST',
+            headers: {
+                "Authorization": "Bearer " + tokenService.getToken(),
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                apiId: newItem.Id,
+                brand: newItem.Brand.Name,
+                name: newItem.Name,
+                desc: newItem.NameWithoutBrand,
+                rating: newItem.Reviews.AverageRating,
+                imgUrl: newItem.Images.PrimaryMedium,
+                bigImgUrl: newItem.Images.PrimaryExtraLarge,
+                price: newItem.SuggestedRetailPrice
+            })
+        })
+        .then(res => res.json())
+        .then(cart => {
+            this.setState({cart});
         })
     }
 
@@ -91,6 +123,8 @@ class App extends Component {
             cart: cartCopy
         })
     }
+        
+    // }
 
 
 
@@ -99,8 +133,8 @@ class App extends Component {
     componentDidMount() {
         let user = userService.getUser();
         this.setState({user});
+        if (user) this.loadCart();
     }
-
 
     render() {
         return (
@@ -134,7 +168,6 @@ class App extends Component {
                     <Route exact path='/results' render={(props) => 
                         <ResultsPage
                             {...props}
-                            handleLogin={this.handleLogin}
                             searchResults={this.state.searchResults}
                             user={this.state.user}
                             addToCart={this.addToCart}
@@ -143,16 +176,12 @@ class App extends Component {
                     <Route exact path='/cart' render={(props) =>
                         <CartPage
                             {...props}
-                            handleLogin={this.handleLogin}
                             cart={this.state.cart}
-                            removeFromCart={this.removeFromCart}
                         />
                     }/>
                     <Route exact path='/details' render={(props) =>
-                        <CartPage
+                        <DetailsPage
                             {...props}
-                            handleLogin={this.handleLogin}
-                            cart={this.state.cart}
                             addToCart={this.addToCart}
                         />
                     }/>

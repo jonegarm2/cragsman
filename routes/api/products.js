@@ -10,6 +10,7 @@ router.post('/search', productsCtrl.search);
 router.get('/details', productsCtrl.details);
 
 
+
 //router.get('/cart', productsCtrl.cart);
 
 module.exports = router;
