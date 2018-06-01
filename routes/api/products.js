@@ -7,8 +7,9 @@ var productsCtrl = require('../../controllers/products');
 /* ----- Public Routes ---------- */
 router.get('/', productsCtrl.products);
 router.post('/search', productsCtrl.search);
-router.get('/:id', productsCtrl.details);
+router.get('/details', productsCtrl.details);
 
-// router.get('/cart', productsCtrl.cart);
+
+//router.get('/cart', productsCtrl.cart);
 
 module.exports = router;

@@ -90,7 +90,6 @@ class App extends Component {
         this.setState({
             cart: cartCopy
         })
-
     }
 
 
@@ -147,6 +146,14 @@ class App extends Component {
                             handleLogin={this.handleLogin}
                             cart={this.state.cart}
                             removeFromCart={this.removeFromCart}
+                        />
+                    }/>
+                    <Route exact path='/details' render={(props) =>
+                        <CartPage
+                            {...props}
+                            handleLogin={this.handleLogin}
+                            cart={this.state.cart}
+                            addToCart={this.addToCart}
                         />
                     }/>
                 </Switch>

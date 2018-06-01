@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const ResultsPage = ({ searchResults, addToCart, user }) => (
     <div>
@@ -9,9 +10,10 @@ const ResultsPage = ({ searchResults, addToCart, user }) => (
                     <img src={item.Images.PrimaryMedium} alt="" /> <br/>
                         <div>
                         {item.Brand.Name} <br/>
-                        {item.Reviews.AverageRating} <br/>
-                        {item.SuggestedRetailPrice} <br/>
-                        {user ? <button  className="CartButton" onClick={() => addToCart(item)}>Add To Cart</button>: null}
+                        Rating: {item.Reviews.AverageRating} <br/>
+                        Retail Price: ${item.SuggestedRetailPrice} <br/>
+                        {user ? <button className="CartButton" onClick={() => addToCart(item)}>Add To Cart</button>: null}
+                        <Link to='/details' className="Button">View Details</Link>
                         </div>
                 </div>)} 
         </ol>
