@@ -24,7 +24,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: [],
+            // products: [],
             cart: [],
             userSearch: "", 
             searchItems: [],
@@ -113,18 +113,30 @@ class App extends Component {
         })
     }
 
-    removeFromCart = (id) => {
-        let cartIdx = this.state.cart.findIndex(function(elem) {
-            return elem.Id === id
+    removeFromCart = (newItem) => {
+        console.log(newItem)
+        fetch('api/users/cart', {
+            method: 'DELETE',
+            headers: {
+                "Authorization": "Bearer " + tokenService.getToken(),
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                apiId: newItem.Id,
+                brand: newItem.Brand.Name,
+                name: newItem.Name,
+                desc: newItem.NameWithoutBrand,
+                rating: newItem.Reviews.AverageRating,
+                imgUrl: newItem.Images.PrimaryMedium,
+                bigImgUrl: newItem.Images.PrimaryExtraLarge,
+                price: newItem.SuggestedRetailPrice
+            })
         })
-        let cartCopy = [...this.state.cart]
-        cartCopy.splice(cartIdx, 1)
-        this.setState({
-            cart: cartCopy
+        .then(res => res.json())
+        .then(cart => {
+            this.setState({cart});
         })
     }
-        
-    // }
 
 
 
@@ -179,10 +191,11 @@ class App extends Component {
                             cart={this.state.cart}
                         />
                     }/>
-                    <Route exact path='/details' render={(props) =>
+                    <Route exact path='/products/:id' render={(props) =>
                         <DetailsPage
-                            {...props}
                             addToCart={this.addToCart}
+                            user={this.state.user}
+                            item={this.state.searchResults.find(item => item.Id === props.match.params.id)}
                         />
                     }/>
                 </Switch>

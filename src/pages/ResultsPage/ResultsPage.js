@@ -13,7 +13,7 @@ const ResultsPage = ({ searchResults, addToCart, user }) => (
                         Rating: {item.Reviews.AverageRating} <br/>
                         Retail Price: ${item.SuggestedRetailPrice} <br/>
                         {user ? <button className="Button" onClick={() => addToCart(item)}>Add To Cart</button>: null}
-                        <Link to='/details' className="Button">View Details</Link>
+                        <Link to={`/products/${item.Id}`} className="Button">View Details</Link>
                         </div>
                 </div>)} 
         </ol>
