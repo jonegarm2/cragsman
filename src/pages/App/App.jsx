@@ -118,7 +118,7 @@ class App extends Component {
         fetch('api/users/cart', {
             method: 'DELETE',
             headers: {
-                "Authorization": "Bearer " + tokenService.getToken(),
+                "Authorization": "Bearer " + tokenService.removeToken(),
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify({
@@ -189,6 +189,7 @@ class App extends Component {
                         <CartPage
                             {...props}
                             cart={this.state.cart}
+                            removeFromCart={this.removeFromCart}
                         />
                     }/>
                     <Route exact path='/products/:id' render={(props) =>
