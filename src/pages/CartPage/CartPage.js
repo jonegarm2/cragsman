@@ -2,10 +2,10 @@ import React from 'react';
 
 const CartPage = ({removeFromCart, cart}) => {
     return (
-        <div>
-            <h1>Cart</h1>
+        <div className="container">
+            <div className="row">
             {cart.map((item, idx) => 
-                <div key={idx}>
+                <div className="col-sm cartItem" key={idx}>
                     {item.desc} <br/>
                     <img src={item.imgUrl} alt="" /> <br/>
                     <div>
@@ -16,6 +16,7 @@ const CartPage = ({removeFromCart, cart}) => {
                     </div>
                 </div>
             )} 
+            </div>
         </div>
     );
 }

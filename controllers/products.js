@@ -25,13 +25,11 @@ function search(req, res){
 }
 
 /*
-
     Utilitiy functions used to get data from API
-
 */
 
 function getApiData(path, cb) {
-    request(`${API}${path}/?perpage=100&api_key=${process.env.API_KEY}`, function(error, response, body) {
+    request(`${API}${path}/?&api_key=${process.env.API_KEY}`, function(error, response, body) {
         cb(error, response, body)
     })
 }
