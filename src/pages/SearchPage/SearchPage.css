@@ -1,0 +1,12 @@
+.SearchPage {
+    text-align: center;
+}
+
+.SearchButton {
+    background-color: royalblue;
+    color: white;
+}
+
+.SearchInput {
+    border-color: black;
+}
