@@ -2,6 +2,8 @@
 
 ### Created By: Jon Garman
 
+[Search Box](https://i.imgur.com/ZmpaEab.png)
+
 ![Technologies Used](https://i.imgur.com/V5wbqox.png)
 ![React](https://i.imgur.com/kEt1qiO.png)
 
@@ -14,6 +16,9 @@
   * Adjust refining method
   * Add sidebar
   * Add similarItems column
+  * Next Page
+  * More Styling
+  * Pricing/Taxes Stripe Setup
 
 ## Special Thanks
   * Jim Clark
