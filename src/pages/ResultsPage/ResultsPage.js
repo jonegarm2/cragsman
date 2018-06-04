@@ -23,3 +23,5 @@ const ResultsPage = ({ searchResults, addToCart, user }) => (
 )
 
 export default ResultsPage;
+
+

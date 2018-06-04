@@ -4,7 +4,17 @@
 
 [Search Box](https://i.imgur.com/ZmpaEab.png)
 
-![Technologies Used](https://i.imgur.com/V5wbqox.png)
+### Technologies Used
+  * HTML
+  * CSS 
+  * JavaScript
+  * MongoDB
+  * Express
+  * Node.js
+  * JWT
+  * Heroku
+  * BootStrap
+  * MLabs
 ![React](https://i.imgur.com/kEt1qiO.png)
 
 [Trello Board](https://trello.com/b/Ue2pKMo4/cragsman)
