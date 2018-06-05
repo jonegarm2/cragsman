@@ -2,9 +2,9 @@
 
 ### Created By: Jon Garman
 
-[Search Box](https://i.imgur.com/ZmpaEab.png)
+![Search Box](https://i.imgur.com/ZmpaEab.png)
 
-![Link to App](https://cragsman.herokuapp.com/)
+[Link to App](https://cragsman.herokuapp.com/)
 
 ### Technologies Used
   * HTML
