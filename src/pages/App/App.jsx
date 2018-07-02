@@ -90,7 +90,7 @@ class App extends Component {
 
     addToCart = (newItem) => {
         console.log(newItem)
-        fetch(`${window.location.protocol}//${window.location.href.split("/")[2]}/api/users/cart`, {
+        fetch(`${window.location.protocol}//${window.location.href.split("/")[2]}/userapi/users/cart`, {
             method: 'POST',
             headers: {
                 "Authorization": "Bearer " + tokenService.getToken(),
